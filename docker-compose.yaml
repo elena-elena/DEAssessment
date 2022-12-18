@@ -1,0 +1,38 @@
+version: '3.5'
+
+networks:
+  assessment:
+    name: assessment
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysqldb
+    environment:
+      MYSQL_DATABASE: 'shipping'
+      MYSQL_USER: 'test_user'
+      MYSQL_PASSWORD: 'testpasswd'
+      MYSQL_ROOT_PASSWORD: 'pass1234'
+    ports:
+      - '3306:3306'
+    networks:
+      assessment:
+        ipv4_address: 10.5.0.5
+  localapp:
+    image: localapp:latest
+    container_name: localapp
+    environment:
+      DB_NAME: 'shipping'
+      DB_USER: 'test_user'
+      DB_PASSWORD: 'testpasswd'
+      DB_HOST: '10.5.0.5'
+    ports: 
+      - '8501:8501'
+    depends_on: 
+      - mysqldb
+    networks:
+      assessment:
+        ipv4_address: 10.5.0.6
