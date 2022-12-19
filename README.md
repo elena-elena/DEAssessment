@@ -29,8 +29,8 @@ localapp    |   URL: http://0.0.0.0:8501
 
 Check that the data is loaded to db:
 `docker exec -it mysqldb mysql -utest_user -ptestpasswd`
-`mysql> use shipping;
- mysql> select count(*) from route_weather;`
+`mysql> use shipping;`
+`mysql> select count(*) from route_weather;`
 
 
 Alternative to docker&docker-compose (app only, no database):
@@ -44,6 +44,9 @@ _Note_: this will not run the db load, the app will log an error message:
 (Background on this error at: https://sqlalche.me/e/14/e3q8)
 
 ```
+or check out the deployed visulization:
+
+https://elena-elena-deassessment-localappmain-m9q45h.streamlit.app/
 
 ## Tests
 
